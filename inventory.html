@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>คลังสินค้า — Inventory</title>
+<link rel="stylesheet" href="ds/styles.css">
+<!-- Thai coverage: Source Serif 4 carries no Thai glyphs, so the design system's
+     serif is paired with its Thai companion. Latin still renders in Source Serif 4;
+     Thai falls through to Noto Serif Thai instead of a mismatched system sans. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@400;600&display=swap">
+<style>
+  :root {
+    --font-heading: "Source Serif 4", "Noto Serif Thai", system-ui, sans-serif;
+    --font-body: "Source Serif 4", "Noto Serif Thai", system-ui, sans-serif;
+  }
+  @keyframes pageIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  .page { animation: pageIn .45s ease; }
+  @media (prefers-reduced-motion: reduce) { .page { animation: none; } }
+
+  /* Layout grids the template sets inline, lifted out so they can collapse
+     on narrow viewports. The desktop values are the design's. */
+  .stat-row { display:flex; flex-wrap:wrap; gap:var(--space-8); margin-bottom:var(--space-8); }
+  .stat-label { font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px; }
+  .dash-cols { display:grid; grid-template-columns:1.2fr 1fr; gap:var(--space-8); align-items:start; }
+  .in-form { display:grid; grid-template-columns:repeat(5,1fr); gap:var(--space-3); align-items:end; margin-bottom:var(--space-6); }
+  .out-form { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-6); margin-bottom:var(--space-6); }
+  .out-item { display:grid; grid-template-columns:2fr 1fr; gap:var(--space-3); }
+  .out-price { display:grid; grid-template-columns:1fr 1fr 1fr; gap:var(--space-3); }
+  .out-meta { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-3); }
+  .pf-grid { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-3); }
+  .table-scroll { overflow-x:auto; }
+  .table-scroll .table { min-width:640px; }
+  .seg { flex-wrap:wrap; }
+
+  @media (max-width: 960px) {
+    .dash-cols { grid-template-columns:1fr; }
+    .in-form { grid-template-columns:repeat(2,1fr); }
+    .out-form { grid-template-columns:1fr; }
+  }
+  @media (max-width: 560px) {
+    .in-form, .out-item, .out-price, .out-meta, .pf-grid { grid-template-columns:1fr; }
+    .stat-row { gap:var(--space-4); }
+  }
+</style>
+</head>
+<body>
+<div style="min-height:100vh;background:var(--color-bg);color:var(--color-text)">
+  <div class="nav" id="nav" style="border-bottom:1px solid var(--color-divider);flex-wrap:wrap">
+    <span class="nav-brand">คลังสินค้า — Inventory</span>
+    <a href="#" data-act="nav" data-page="dashboard" style="font-weight:600">ภาพรวม</a>
+    <a href="#" data-act="nav" data-page="in" style="font-weight:600">รับเข้าสินค้า</a>
+    <a href="#" data-act="nav" data-page="out" style="font-weight:600">จ่ายออกสินค้า</a>
+    <a href="#" data-act="nav" data-page="products" style="font-weight:600">สินค้า</a>
+    <a href="#" data-act="nav" data-page="reports" style="font-weight:600">รายงาน</a>
+  </div>
+
+  <div id="main" style="max-width:1180px;margin:0 auto;padding:var(--space-6) var(--space-4) var(--space-8)"></div>
+  <div id="dialog-root"></div>
+</div>
+
+<script src="inventory.js"></script>
+</body>
+</html>
